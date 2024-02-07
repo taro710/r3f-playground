@@ -1,5 +1,3 @@
-import { useRef, useState } from "react";
-import { useFrame } from "@react-three/fiber";
 import {
   useGLTF,
   Center,
@@ -7,6 +5,8 @@ import {
   Environment,
   CameraControls,
 } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
+import { useRef, useState } from "react";
 
 function Model() {
   const mesh = useRef();
@@ -44,6 +44,7 @@ function Model() {
 export default function App() {
   return (
     <>
+      <color attach="background" args={["#f0f0f0"]} />
       <ambientLight />
       <pointLight position={[10, 10, 5]} />
       <Model />

@@ -1,4 +1,3 @@
-import type { BoxProps, PlaneProps } from "@react-three/cannon";
 import {
   Physics,
   useBox,
@@ -8,6 +7,8 @@ import {
 import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { useRef, useState } from "react";
+
+import type { BoxProps, PlaneProps } from "@react-three/cannon";
 import type { Mesh } from "three";
 
 const materialColors = {

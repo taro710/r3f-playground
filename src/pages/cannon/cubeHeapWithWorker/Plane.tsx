@@ -1,6 +1,7 @@
-import type { BoxProps } from "@react-three/cannon";
 import { useBox } from "@react-three/cannon";
 import { useRef } from "react";
+
+import type { BoxProps } from "@react-three/cannon";
 import type { Mesh } from "three";
 
 type Props = {
@@ -14,7 +15,7 @@ const Plane = ({ geomProps, onClick }: Props) => {
     <mesh ref={ref} receiveShadow onClick={onClick}>
       <boxGeometry {...geomProps} />
       {/* <shadowMaterial color="#171717" /> */}
-      <meshStandardMaterial color={"white"} />
+      <meshStandardMaterial color="white" />
     </mesh>
   );
 };

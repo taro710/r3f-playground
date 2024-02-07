@@ -3,10 +3,10 @@ import { Canvas } from "@react-three/fiber";
 import { useMemo, useState } from "react";
 import { Color } from "three";
 
-import niceColors from "./colors";
-import Plane from "./Plane";
 import Boxes from "./Box";
+import Plane from "./Plane";
 import Spheres from "./Sphere";
+import niceColors from "./colors";
 
 const instancedGeometry = {
   box: Boxes,

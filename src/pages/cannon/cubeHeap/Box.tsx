@@ -1,7 +1,8 @@
-import type { Triplet } from "@react-three/cannon";
 import { useBox } from "@react-three/cannon";
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
+
+import type { Triplet } from "@react-three/cannon";
 import type { InstancedMesh } from "three";
 
 type InstancedGeometryProps = {

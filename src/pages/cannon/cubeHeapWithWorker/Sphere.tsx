@@ -1,5 +1,6 @@
 import { useSphere } from "@react-three/cannon";
 import { useRef } from "react";
+
 import type { InstancedMesh } from "three";
 
 type InstancedGeometryProps = {
@@ -32,7 +33,7 @@ const Spheres = ({ colors, number, size }: InstancedGeometryProps) => {
         />
       </sphereGeometry>
       {/* <meshLambertMaterial vertexColors /> */}
-      <meshStandardMaterial color={"red"} roughness={0} />
+      <meshStandardMaterial color="red" roughness={0} />
     </instancedMesh>
   );
 };

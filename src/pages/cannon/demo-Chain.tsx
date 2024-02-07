@@ -1,41 +1,56 @@
-import type { CylinderArgs, Triplet } from '@react-three/cannon'
-import { Physics, useBox, useConeTwistConstraint, useCylinder, useSphere } from '@react-three/cannon'
-import { Canvas, useFrame } from '@react-three/fiber'
-import type { PropsWithChildren } from 'react'
-import { createContext, createRef, useCallback, useContext, useMemo, useRef, useState } from 'react'
-import type { Mesh, Object3D } from 'three'
-import { Color } from 'three'
+import {
+  Physics,
+  useBox,
+  useConeTwistConstraint,
+  useCylinder,
+  useSphere,
+} from "@react-three/cannon";
+import { Canvas, useFrame } from "@react-three/fiber";
+import {
+  createContext,
+  createRef,
+  useCallback,
+  useContext,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { Color } from "three";
 
-const maxMultiplierExamples = [0, 500, 1000, 1500, undefined] as const
+import type { CylinderArgs, Triplet } from "@react-three/cannon";
+import type { PropsWithChildren } from "react";
+import type { Mesh, Object3D } from "three";
+
+const maxMultiplierExamples = [0, 500, 1000, 1500, undefined] as const;
 
 function notUndefined<T>(value: T | undefined): value is T {
-  return value !== undefined
+  return value !== undefined;
 }
 
 const parent = createContext({
   position: [0, 0, 0] as Triplet,
   ref: createRef<Object3D>(),
-})
+});
 
 type ChainLinkProps = {
-  args?: CylinderArgs
-  color?: Color | string
-  maxMultiplier?: number
-}
+  args?: CylinderArgs;
+  color?: Color | string;
+  maxMultiplier?: number;
+};
 
 function ChainLink({
   args = [0.5, 0.5, 2, 16],
   children,
-  color = 'white',
+  color = "white",
   maxMultiplier,
 }: PropsWithChildren<ChainLinkProps>): JSX.Element {
   const {
     position: [x, y, z],
     ref: parentRef,
-  } = useContext(parent)
+  } = useContext(parent);
 
-  const [, , height = 2] = args
-  const position: Triplet = [x, y - height, z]
+  const [, , height = 2] = args;
+  const position: Triplet = [x, y - height, z];
 
   const [ref] = useCylinder(
     () => ({
@@ -44,8 +59,8 @@ function ChainLink({
       mass: 1,
       position,
     }),
-    useRef<Mesh>(null),
-  )
+    useRef<Mesh>(null)
+  );
 
   useConeTwistConstraint(parentRef, ref, {
     angle: Math.PI / 8,
@@ -55,7 +70,7 @@ function ChainLink({
     pivotA: [0, -height / 2, 0],
     pivotB: [0, height / 2, 0],
     twistAngle: 0,
-  })
+  });
 
   return (
     <>
@@ -65,23 +80,27 @@ function ChainLink({
       </mesh>
       <parent.Provider value={{ position, ref }}>{children}</parent.Provider>
     </>
-  )
+  );
 }
 
 type ChainProps = {
-  length: number
-  maxMultiplier?: number
-}
+  length: number;
+  maxMultiplier?: number;
+};
 
-function Chain({ children, length, maxMultiplier }: PropsWithChildren<ChainProps>): JSX.Element {
+function Chain({
+  children,
+  length,
+  maxMultiplier,
+}: PropsWithChildren<ChainProps>): JSX.Element {
   const color = useMemo(() => {
-    if (maxMultiplier === undefined) return 'white'
+    if (maxMultiplier === undefined) return "white";
 
-    const maxExample = Math.max(...maxMultiplierExamples.filter(notUndefined))
-    const red = Math.floor(Math.min(100, (maxMultiplier / maxExample) * 100))
+    const maxExample = Math.max(...maxMultiplierExamples.filter(notUndefined));
+    const red = Math.floor(Math.min(100, (maxMultiplier / maxExample) * 100));
 
-    return new Color(`rgb(${red}%, 0%, ${100 - red}%)`)
-  }, [maxMultiplier])
+    return new Color(`rgb(${red}%, 0%, ${100 - red}%)`);
+  }, [maxMultiplier]);
 
   return (
     <>
@@ -90,21 +109,27 @@ function Chain({ children, length, maxMultiplier }: PropsWithChildren<ChainProps
           <ChainLink color={color} maxMultiplier={maxMultiplier}>
             {acc}
           </ChainLink>
-        )
+        );
       }, children)}
     </>
-  )
+  );
 }
 
-function PointerHandle({ children, size }: PropsWithChildren<{ size: number }>): JSX.Element {
-  const position: Triplet = [0, 0, 0]
-  const args: Triplet = [size, size, size * 2]
+function PointerHandle({
+  children,
+  size,
+}: PropsWithChildren<{ size: number }>): JSX.Element {
+  const position: Triplet = [0, 0, 0];
+  const args: Triplet = [size, size, size * 2];
 
-  const [ref, api] = useBox(() => ({ args, position, type: 'Kinematic' }), useRef<Mesh>(null))
+  const [ref, api] = useBox(
+    () => ({ args, position, type: "Kinematic" }),
+    useRef<Mesh>(null)
+  );
 
   useFrame(({ mouse: { x, y }, viewport: { height, width } }) => {
-    api.position.set((x * width) / 2, (y * height) / 2, 0)
-  })
+    api.position.set((x * width) / 2, (y * height) / 2, 0);
+  });
 
   return (
     <group>
@@ -114,16 +139,23 @@ function PointerHandle({ children, size }: PropsWithChildren<{ size: number }>):
       </mesh>
       <parent.Provider value={{ position, ref }}>{children}</parent.Provider>
     </group>
-  )
+  );
 }
 
 type StaticHandleProps = {
-  position: Triplet
-  radius: number
-}
+  position: Triplet;
+  radius: number;
+};
 
-function StaticHandle({ children, position, radius }: PropsWithChildren<StaticHandleProps>): JSX.Element {
-  const [ref] = useSphere(() => ({ args: [radius], position, type: 'Static' }), useRef<Mesh>(null))
+function StaticHandle({
+  children,
+  position,
+  radius,
+}: PropsWithChildren<StaticHandleProps>): JSX.Element {
+  const [ref] = useSphere(
+    () => ({ args: [radius], position, type: "Static" }),
+    useRef<Mesh>(null)
+  );
   return (
     <group>
       <mesh ref={ref}>
@@ -132,25 +164,25 @@ function StaticHandle({ children, position, radius }: PropsWithChildren<StaticHa
       </mesh>
       <parent.Provider value={{ position, ref }}>{children}</parent.Provider>
     </group>
-  )
+  );
 }
 
 const style = {
-  color: 'white',
-  fontSize: '1.2em',
+  color: "white",
+  fontSize: "1.2em",
   left: 50,
-  position: 'absolute',
+  position: "absolute",
   top: 20,
-} as const
+} as const;
 
 function ChainScene(): JSX.Element {
-  const [resetCount, setResetCount] = useState(0)
+  const [resetCount, setResetCount] = useState(0);
 
   const reset = useCallback(() => {
-    setResetCount((prev) => prev + 1)
-  }, [])
+    setResetCount((prev) => prev + 1);
+  }, []);
 
-  const separation = 4
+  const separation = 4;
 
   return (
     <>
@@ -163,10 +195,16 @@ function ChainScene(): JSX.Element {
           useLegacyLights: true,
         }}
       >
-        <color attach="background" args={['#171720']} />
+        <color attach="background" args={["#171720"]} />
         <ambientLight intensity={0.5} />
         <pointLight position={[-10, -10, -10]} />
-        <spotLight position={[10, 10, 10]} angle={0.8} penumbra={1} intensity={1} castShadow />
+        <spotLight
+          position={[10, 10, 10]}
+          angle={0.8}
+          penumbra={1}
+          intensity={1}
+          castShadow
+        />
         <Physics gravity={[0, -40, 0]} allowSleep={false}>
           <PointerHandle size={1.5}>
             <Chain length={7} />
@@ -175,7 +213,12 @@ function ChainScene(): JSX.Element {
             <StaticHandle
               key={`${resetCount}-${maxMultiplier}`}
               radius={1.5}
-              position={[(maxMultiplierExamples.length * -separation) / 2 + index * separation, 8, 0]}
+              position={[
+                (maxMultiplierExamples.length * -separation) / 2 +
+                  index * separation,
+                8,
+                0,
+              ]}
             >
               <Chain maxMultiplier={maxMultiplier} length={8} />
             </StaticHandle>
@@ -192,7 +235,7 @@ function ChainScene(): JSX.Element {
         </pre>
       </div>
     </>
-  )
+  );
 }
 
-export default ChainScene
+export default ChainScene;

@@ -1,30 +1,9 @@
-import { useState } from "react";
-import {
-  OrbitControls,
-  Environment,
-  useEnvironment,
-  Sphere,
-} from "@react-three/drei";
+import { OrbitControls, Environment } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-
-// const GeoEnv = () => {
-//   const envMap = useEnvironment({
-//     files: "/src/assets/japand.jpg",
-//   });
-
-//   return (
-//     <>
-//       <Environment map={envMap} background />
-//       <Sphere>
-//         <meshStandardMaterial />
-//       </Sphere>
-//     </>
-//   );
-// };
+import { useState } from "react";
 
 const Scene = () => {
   const [color, setColor] = useState<string>("hotpink");
-
   return (
     <mesh
       onClick={() => {
@@ -35,8 +14,8 @@ const Scene = () => {
         }
       }}
     >
-      <boxGeometry />
-      <meshStandardMaterial color={color} roughness={0.02} />
+      <torusGeometry />
+      <meshStandardMaterial color={color} roughness={0} />
     </mesh>
   );
 };
@@ -47,11 +26,7 @@ const App = () => {
       <OrbitControls />
       <Scene />
       <pointLight position={[10, 10, 10]} />
-      <Environment
-        files={"/src/assets/texture/environment/poly_haven_studio_1k.hdr"}
-        blur={0}
-        background
-      />
+      <Environment preset="sunset" blur={0.7} background />
     </Canvas>
   );
 };

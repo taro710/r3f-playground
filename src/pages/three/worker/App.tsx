@@ -1,5 +1,5 @@
-import { lazy } from "react";
 import { Canvas } from "@react-three/offscreen";
+import { lazy } from "react";
 
 // This is the fallback component that will be rendered on the main thread
 // This will happen on systems where OffscreenCanvas is not supported

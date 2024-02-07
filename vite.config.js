@@ -1,5 +1,5 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
 
 export default defineConfig({
   // https://github.com/vitejs/vite-plugin-react/issues/151
@@ -8,4 +8,4 @@ export default defineConfig({
   worker: {
     plugins: [react({ fastRefresh: false })],
   },
-})
+});
