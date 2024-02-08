@@ -13,9 +13,10 @@ import HingeMotor from "./pages/cannon/demo-HingeMotor";
 import Paused from "./pages/cannon/demo-Paused";
 import Triggers from "./pages/cannon/demo-Triggers";
 import Top from "./pages/index";
+import Porsche from "./pages/three/porsche/Index";
 import Sample from "./pages/three/sample/Index";
-import Sample3 from "./pages/three/sample2/Index";
-import Sample2 from "./pages/three/sample3/Index";
+import Sample2 from "./pages/three/sample2/Index";
+import Sample3 from "./pages/three/sample3/Index";
 import Worker from "./pages/three/worker/App";
 // import Trimesh from "./pages/cannon/demo-Trimesh";
 // import ConvexPolyhedron from "./pages/cannon/demo-ConvexPolyhedron";
@@ -50,6 +51,7 @@ createRoot(document.getElementById("root")!).render(
         <Route path="/sample" element={<Sample />} />
         <Route path="/sample2" element={<Sample2 />} />
         <Route path="/sample3" element={<Sample3 />} />
+        <Route path="/porsche" element={<Porsche />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
