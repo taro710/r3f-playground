@@ -20,6 +20,9 @@ const Top = () => {
         <Link to="/tree">tree</Link>
       </dd>
       <dd>
+        <Link to="/cube-by-cube">cubeByCube</Link>
+      </dd>
+      <dd>
         <Link to="/worker">worker</Link>
       </dd>
       <dd>
