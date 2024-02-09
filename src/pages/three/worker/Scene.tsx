@@ -7,17 +7,20 @@ import {
 } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useRef, useState } from "react";
+import { Mesh } from "three";
 
 function Model() {
-  const mesh = useRef();
+  const mesh = useRef<Mesh>(null);
   const { nodes, materials } = useGLTF("/pmndrs.glb");
   const [hovered, setHover] = useState(false);
   const [active, setActive] = useState(false);
   const color = hovered ? "hotpink" : "orange";
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
+    if (!mesh.current) return;
     mesh.current.rotation.x += delta / 2;
     mesh.current.rotation.y += delta / 2;
   });
+
   return (
     <>
       <Center ref={mesh}>
@@ -28,7 +31,7 @@ function Model() {
           scale={active ? 0.3 : 0.25}
           onClick={(e) => (e.stopPropagation(), setActive(!active))}
           onPointerOver={(e) => (e.stopPropagation(), setHover(true))}
-          onPointerOut={(e) => setHover(false)}
+          onPointerOut={() => setHover(false)}
         />
       </Center>
       <ContactShadows

@@ -13,10 +13,12 @@ import HingeMotor from "./pages/cannon/demo-HingeMotor";
 import Paused from "./pages/cannon/demo-Paused";
 import Triggers from "./pages/cannon/demo-Triggers";
 import Top from "./pages/index";
+import Basic from "./pages/three/basic/index";
 import Porsche from "./pages/three/porsche/Index";
 import Sample from "./pages/three/sample/Index";
 import Sample2 from "./pages/three/sample2/Index";
 import Sample3 from "./pages/three/sample3/Index";
+import Tree from "./pages/three/tree/index";
 import Worker from "./pages/three/worker/App";
 // import Trimesh from "./pages/cannon/demo-Trimesh";
 // import ConvexPolyhedron from "./pages/cannon/demo-ConvexPolyhedron";
@@ -28,6 +30,8 @@ createRoot(document.getElementById("root")!).render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Top />} />
+        <Route path="/basic" element={<Basic />} />
+        <Route path="/tree" element={<Tree />} />
 
         <Route path="/worker" element={<Worker />} />
 
