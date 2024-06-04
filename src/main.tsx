@@ -26,38 +26,55 @@ import Worker from "./pages/three/worker/App";
 // import Heightfield from "./pages/cannon/demo-Heightfield";
 // import KinematicCube from "./pages/cannon/demo-KinematicCube";
 
+const baseUrl = "/r3f-playground";
+
 createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Top />} />
-        <Route path="/basic" element={<Basic />} />
-        <Route path="/tree" element={<Tree />} />
-        <Route path="/cube-by-cube" element={<CubeByCube />} />
+        <Route path={`${baseUrl}/`} element={<Top />} />
+        <Route path={`${baseUrl}/basic`} element={<Basic />} />
+        <Route path={`${baseUrl}/tree`} element={<Tree />} />
+        <Route path={`${baseUrl}/cube-by-cube`} element={<CubeByCube />} />
 
-        <Route path="/worker" element={<Worker />} />
+        <Route path={`${baseUrl}/worker`} element={<Worker />} />
 
-        <Route path="/cannon/chain" element={<Chain />} />
-        <Route path="/cannon/compound-body" element={<CompoundBody />} />
-        <Route path="/cannon/constraints" element={<Constraints />} />
+        <Route path={`${baseUrl}/cannon/chain`} element={<Chain />} />
+        <Route
+          path={`${baseUrl}/cannon/compound-body`}
+          element={<CompoundBody />}
+        />
+        <Route
+          path={`${baseUrl}/cannon/constraints`}
+          element={<Constraints />}
+        />
         {/* <Route
           path={"/cannon/convex-polyhedron"}
           element={<ConvexPolyhedron />}
         /> */}
-        <Route path="/cannon/cube-heap" element={<CubeHeap />} />
-        <Route path="/cannon/cube-heap2" element={<CubeHeapWithWorker />} />
-        <Route path="/cannon/friction" element={<Friction />} />
+        <Route path={`${baseUrl}/cannon/cube-heap`} element={<CubeHeap />} />
+        <Route
+          path={`${baseUrl}/cannon/cube-heap2`}
+          element={<CubeHeapWithWorker />}
+        />
+        <Route path={`${baseUrl}/cannon/friction`} element={<Friction />} />
         {/* <Route path={"/cannon/heightfield"} element={<Heightfield />} /> */}
-        <Route path="/cannon/hinge-motor" element={<HingeMotor />} />
+        <Route
+          path={`${baseUrl}/cannon/hinge-motor`}
+          element={<HingeMotor />}
+        />
         {/* <Route path={"/cannon/kinematic-cube"} element={<KinematicCube />} /> */}
-        <Route path="/cannon/paused" element={<Paused />} />
-        <Route path="/cannon/sphere-debug" element={<SphereDebug />} />
-        <Route path="/cannon/triggers" element={<Triggers />} />
+        <Route path={`${baseUrl}/cannon/paused`} element={<Paused />} />
+        <Route
+          path={`${baseUrl}/cannon/sphere-debug`}
+          element={<SphereDebug />}
+        />
+        <Route path={`${baseUrl}/cannon/triggers`} element={<Triggers />} />
         {/* <Route path={"/cannon/trimesh"} element={<Trimesh />} /> */}
-        <Route path="/sample" element={<Sample />} />
-        <Route path="/sample2" element={<Sample2 />} />
-        <Route path="/sample3" element={<Sample3 />} />
-        <Route path="/porsche" element={<Porsche />} />
+        <Route path={`${baseUrl}/sample`} element={<Sample />} />
+        <Route path={`${baseUrl}/sample2`} element={<Sample2 />} />
+        <Route path={`${baseUrl}/sample3`} element={<Sample3 />} />
+        <Route path={`${baseUrl}/porsche`} element={<Porsche />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
