@@ -8,4 +8,7 @@ export default defineConfig({
   worker: {
     plugins: [react({ fastRefresh: false })],
   },
+  build: {
+    outDir: "./docs",
+  },
 });
